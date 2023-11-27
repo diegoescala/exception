@@ -5,6 +5,14 @@
 ExceptionCore::ExceptionCore():
     running_(true)
 {
+    display_render_timer_ = 
+        std::unique_ptr<Timer>(new Timer(
+            std::chrono::milliseconds(2000), 
+            [&]()
+            {
+                this->display_.renderMessages();
+                
+            }));
 }
 
 ExceptionCore::~ExceptionCore() {

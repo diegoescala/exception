@@ -5,6 +5,12 @@
 #include <string>
 #include <iostream>
 
+WeatherModule::WeatherModule(std::string msg):
+  message_(std::move(msg))
+{
+}
+
+
 WeatherModule::~WeatherModule()
 {
     std::cout << "Destroying WM" << std::endl;
@@ -13,6 +19,6 @@ WeatherModule::~WeatherModule()
 
 std::vector<DisplayMessage> WeatherModule::getMessages() {
     std::vector<DisplayMessage> messages;
-    messages.push_back(std::string("It's rainy; grab an umbrella!"));
+    messages.push_back(message_);
     return messages;
 }
