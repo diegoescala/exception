@@ -21,7 +21,7 @@ public:
     
 private:
     std::atomic<bool> running_;
-    std::map<std::shared_ptr<ExceptionModule>, Timer*> module_timers_;
+    std::map<std::shared_ptr<ExceptionModule>, std::unique_ptr<Timer>> module_timers_;
     Display display_;
     
 };
