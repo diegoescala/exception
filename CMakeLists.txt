@@ -1,28 +1,38 @@
-cmake_minimum_required(VERSION 3.18)
-project(exception)
+cmake_minimum_required(VERSION 3.9)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+project(exceptionapp)
+
+set ( CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR} CACHE PATH "Install directory" FORCE)
+message (STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/out/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/out/bin)
+
+add_subdirectory(libexception)
+add_subdirectory(exception)
+add_subdirectory(3rdParty/cpp-httplib)
+
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+	add_custom_target(doxy)
+endif(DOXYGEN_FOUND)
+
+if(MSVC11)
+	add_definitions("-D_VARIADIC_MAX#10")
+endif(MSVC11)
 
 
-set(SOURCE_FILES 
-src/ExceptionCore.h
-src/WeatherModule.h
-src/Display.h
-src/ExceptionModule.h
-src/DisplayMessage.h
-src/MessageIcon.h
-src/main.cpp
-src/ExceptionModule.cpp
-src/Display.cpp
-src/MessageIcon.cpp
-src/WeatherModule.cpp
-src/ExceptionCore.cpp
-src/DisplayMessage.cpp
-src/Timer.h
-src/Timer.cpp
-)
+export(TARGETS exception libexception httplib
+  FILE "${PROJECT_BINARY_DIR}/ExceptionTargets.cmake")
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
+#target_compile_features(CamEngineModels PRIVATE cxx_std_17)
+# set_property(TARGET CamEngineModels PROPERTY CXX_STANDARD 17)
+
+export(PACKAGE ExceptionApp)
+
+option (DEVELOPMENT_BUILD "Development / non-production build" FALSE)
+  
