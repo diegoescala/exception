@@ -9,12 +9,13 @@ project(exceptionapp)
 set ( CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR} CACHE PATH "Install directory" FORCE)
 message (STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/out/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/out/bin)
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/out/lib)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/out/bin)
 
 add_subdirectory(libexception)
 add_subdirectory(exception)
 add_subdirectory(3rdParty/cpp-httplib)
+add_subdirectory(modules/weather)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
@@ -26,7 +27,7 @@ if(MSVC11)
 endif(MSVC11)
 
 
-export(TARGETS exception libexception httplib
+export(TARGETS exceptionapp Exception httplib
   FILE "${PROJECT_BINARY_DIR}/ExceptionTargets.cmake")
 
 #target_compile_features(CamEngineModels PRIVATE cxx_std_17)
