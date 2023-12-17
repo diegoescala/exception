@@ -8,3 +8,5 @@ find_package(Exception 1.0.0 REQUIRED PATHS ../../build/lib/cmake/Exception)
 target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/../../include")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Exception)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libWeatherModule.dylib DESTINATION ./modules)

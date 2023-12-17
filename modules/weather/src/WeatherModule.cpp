@@ -22,3 +22,7 @@ std::vector<DisplayMessage> WeatherModule::getMessages() {
     messages.push_back(message_);
     return messages;
 }
+
+extern "C" void print() {
+    printf("herro world\n");
+}
