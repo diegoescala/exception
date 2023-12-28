@@ -8,6 +8,6 @@ set(SOURCE_FILES
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-# install(DIRECTORY ../test-data DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug)
+install(TARGETS ${PROJECT_NAME} DESTINATION .)
 
 target_link_libraries(${PROJECT_NAME} Exception)
